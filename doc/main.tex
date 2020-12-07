@@ -1,8 +1,13 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{a4wide}
-\usepackage{polski}
+\usepackage{amssymb}
 \usepackage{todonotes}
+\usepackage[
+    colorlinks = true,
+    linkcolor = blue,        
+    urlcolor  = violet,
+]{hyperref}
 
 \title{\textbf{Application of self-organizing map to the analysis of the geotechnical data}.\\ \textit{A project overview}} 
 
@@ -16,11 +21,29 @@
 \maketitle
 
 \section{Project aim}
-\todo{EW}
-\section{Technical issues}
-\todo{EW}
+The aim of the project is to construct and evaluate a self-organizing map model (SOM)\footnote{T. Kohonen, M. R. Schroeder, T. S. Huang, “Self-Organizing Maps”, Springer-Verlag, 2001.} to given geotechnical data in the context of unsupervised learning tasks.
+Given data contains 8 files with a three-dimensional data frame. Each row of the data frame has the structure written below:
+\begin{equation}
+  \left(d, p_1, p_2 \right) \in \mathbb{R}^{3}
+\end{equation}
 
-We are considering to use simultaneously two different programming technologies to accomplsih our project goals: \texttt{Python} and \texttt{R} programming language. The first technology is very suitable for tasks like
+\noindent where $d$ stands for depth of stuck sensor in the ground and $p_i, i\in\left\{1, 2\right\}$ are sensor readings. Analysis of this data will be included in the final report.\\
+For better reference, we will also use a simpler method (e.g. PCA) as a base method. It will help us to decide whether such a complex model like SOM has any added value to the performed analysis. 
+
+\section{Technical issues}
+
+We are considering to use simultaneously two different programming languages to accomplish our project goals: \texttt{Python 3.9.0} and \texttt{R 4.0.3} programming language.
+The first technology is very suitable for tasks like constructing, learning and evaluating machine learning models. This property follows from efficient implementations of machine learning libraries in low-level languages like \texttt{C++} and expressive FFI (Foreign Function Interface) between them and Python. Also, there is plenty of SOM libraries written in \texttt{Python} -- some of them are listed below:
+
+\begin{itemize}
+  \item \texttt{som} \footnote{\url{https://pypi.org/project/som/}}
+  \item \texttt{som-learn} \footnote{\url{https://pypi.org/project/som-learn/}}
+  \item \texttt{kohonen}. \footnote{\url{https://pypi.org/project/kohonen/}}
+\end{itemize}
+
+We are not sure yet which would fit our demands. There is also the possibility that (in case of lack of proper implementation) we will write SOM from scratch with \texttt{Tensorflow} or \texttt{Theano} frameworks.
+The second technology, \texttt{R} programming language, due to excellent libraries for data processing, transformation and visualization will be involved in tasks such as data preparation and simple exploratory data analysis.
 
 \end{document}
+
 
