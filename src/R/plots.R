@@ -1,7 +1,7 @@
-library(stringr)
+library(tidyverse)
 library(plot3D)
 
-plot_2d = function(dfx, x, y, z) {
+scatter_plot_2d = function(dfx, x, y, z) {
   xlabel = rlang::enquo(x)
   ylabel = rlang::enquo(y)
   dfx %>%
@@ -10,8 +10,8 @@ plot_2d = function(dfx, x, y, z) {
     ) + 
     ggplot2::geom_point() +
     ggplot2::scale_color_gradient(
-      low="yellow",
-      high="red"
+      low = "yellow",
+      high = "red"
     ) +
     ggplot2::theme_classic() +
     ggplot2::theme(
@@ -27,7 +27,7 @@ plot_2d = function(dfx, x, y, z) {
 }
 
 
-plot_3d = function(dfx, x, y, z) {
+scatter_plot_3d = function(dfx, x, y, z) {
   x_ = dfx %>% dplyr::pull({{x}})
   y_ = dfx %>% dplyr::pull({{y}})
   z_ = dfx %>% dplyr::pull({{z}})
@@ -46,4 +46,17 @@ plot_3d = function(dfx, x, y, z) {
     d = 2,
     cex = 1.5
   )
+}
+
+
+pdepth_plot = function(dfx, pressure, depth) {
+  dfx %>%
+    ggplot2::ggplot(aes(
+      x = {{ depth }},
+      y = {{ pressure }}
+    )) +
+    ggplot2::geom_line() +
+    ggplot2::scale_y_reverse() +
+    xlab("Depth") +
+    ylab("Pressure")
 }
