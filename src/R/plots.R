@@ -60,3 +60,37 @@ pdepth_plot = function(dfx, pressure, depth) {
     xlab("Depth") +
     ylab("Pressure")
 }
+
+box_plot = function(dfx) {
+  melted_df = tibble::tibble(reshape::melt(data.frame(dfx)))
+  melted_df %>%
+    ggplot2::ggplot(aes(x = variable, y = value)) + 
+    ggplot2::geom_boxplot() +
+    ggplot2::theme_classic() +
+    ggplot2::theme(
+      axis.title = ggplot2::element_text(size = 15, face = "bold"),
+      axis.text = ggplot2::element_text(size = 15, face = "bold"),
+      legend.text = ggplot2::element_text(size = 15, face = "bold"),
+      legend.title = ggplot2::element_text(size = 15, face = "bold")
+    ) + 
+    xlab("") + 
+    ylab("")
+}
+
+histogram_plot = function(dfx) {
+  melted_df = tibble::tibble(reshape::melt(data.frame(dfx)))
+  melted_df %>%
+    ggplot2::ggplot(aes(x = value)) + 
+    ggplot2::geom_histogram(aes(y = ..density..), color = "black", fill = "white") +
+    ggplot2::geom_density(linetype = "dashed", color = "red") +
+    ggplot2::facet_wrap( ~ variable) + 
+    ggplot2::theme_classic() +
+    ggplot2::theme(
+      axis.title = ggplot2::element_text(size = 15, face = "bold"),
+      axis.text = ggplot2::element_text(size = 15, face = "bold"),
+      legend.text = ggplot2::element_text(size = 15, face = "bold"),
+      legend.title = ggplot2::element_text(size = 15, face = "bold")
+    ) + 
+    xlab("") + 
+    ylab("")
+}
